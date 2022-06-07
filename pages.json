@@ -1,53 +1,53 @@
 {
-	"pages": [ {
-            "path" : "pages/home/home",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/cate/cate",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/cart/cart",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            } 
-            
-        }
-        ,{
-            "path" : "pages/my/my",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
-	"globalStyle": {
-		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "优购",
-		"navigationBarBackgroundColor": "#c00000",
-		"backgroundColor": "#FFFFFF"
-	},
-  "tabBar":{
-    "selectedColor": "#c00000",
-    "list":[
-      {
+  "pages": [{
+    "path": "pages/home/home",
+    "style": {}
+  }, {
+    "path": "pages/cate/cate",
+    "style": {}
+  }, {
+    "path": "pages/cart/cart",
+    "style": {}
+  }, {
+    "path": "pages/my/my",
+    "style": {}
+  }],
+  "subPackages": [
+    {
+      // 根目录
+      "root":"subpkg",
+      "pages":[{
+                    "path" : "goods_detail/goods_detail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "goods_list/goods_list",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "优购",
+    "navigationBarBackgroundColor": "#C00000",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "selectedColor": "#C00000",
+    "list": [{
         "pagePath": "pages/home/home",
-        "text": "文本",
+        "text": "首页",
         "iconPath": "static/tab_icons/home.png",
         "selectedIconPath": "static/tab_icons/home-active.png"
       },
