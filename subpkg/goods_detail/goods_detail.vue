@@ -27,7 +27,7 @@
       </view>
       <!-- 运费 -->
       <view class="yf">
-        快递：免运费
+        快递：免运费 
       </view>
     </view>
     <!-- 富文本 -->
@@ -35,14 +35,14 @@
     
     <!-- 商品导航组件区域 -->
     <view class="goods_nav">
-      <uni-goods-nav :options="options" :fill="true" :button-group="buttonGroup" @click="onClick"
-      				@buttonClick="buttonClick" />
+      <uni-goods-nav :options="options" :fill="true" :button-group="buttonGroup" @click="onClick" 	@buttonClick="buttonClick" />
       
     </view>
   </view>
 </template>
 
 <script>
+  import {mapState,mapMutations,mapGetters} from 'vuex'
   export default {
     data() {
       return {
@@ -56,7 +56,7 @@
         		}, {
         			icon: 'cart',
         			text: '购物车',
-        			info: 2
+        			info: 0
         		}],
         	    buttonGroup: [{
         	      text: '加入购物车',
@@ -71,6 +71,29 @@
         	    ]
       };
     },
+    computed:{
+      ...mapState('m_cart',[]),
+      ...mapGetters('m_cart',['total'])
+    },
+    watch:{
+      // total(newVal){
+      //   const findRes = this.options.find(x=> x.text === '购物车')
+      //   console.log(findRes)
+      //   if(findRes){
+      //     findRes.info = newVal
+      //   }
+      // }
+      total:{
+        handler(newVal){
+          const findRes = this.options.find(x=> x.text === '购物车')
+            console.log(findRes)
+            if(findRes){
+              findRes.info = newVal
+            }
+        },
+        immediate:true
+      }
+    },
     onLoad(options){
       // 获取商品id
       const goods_id = options.goods_id
@@ -78,6 +101,7 @@
     this.getGoodsDetail(goods_id)
     },
     methods:{
+      ...mapMutations('m_cart',['addToCart']),
       // 定义请求商品详情数据的方法
       async getGoodsDetail(goods_id){
         const {data:res} = await uni.$http.get('/api/public/v1/goods/detail',{goods_id})
@@ -102,6 +126,21 @@
           uni.switchTab({
             url:'/pages/cart/cart'
           })
+        }
+      },
+      buttonClick(e){
+        if(e.content.text === '加入购物车'){
+          // 组织商品的信息对象
+         const goods = {
+                 goods_id: this.goods_info.goods_id,       // 商品的Id
+                 goods_name: this.goods_info.goods_name,   // 商品的名称
+                 goods_price: this.goods_info.goods_price, // 商品的价格
+                 goods_count: 1,                           // 商品的数量
+                 goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片
+                 goods_state: true                         // 商品的勾选状态
+              }
+              // 调用addToCart方法
+              this.addToCart(goods)
         }
       }
     }

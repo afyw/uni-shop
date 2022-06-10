@@ -56,7 +56,7 @@
 				this.inputValue = +val;
 			},
 			inputValue(newVal, oldVal) {
-				if (+newVal !== +oldVal) {
+				if (+newVal !== +oldVal && Number(newVal) && String(newVal).indexOf('.') === -1) {
 					this.$emit("change", newVal);
 				}
 			}
@@ -101,13 +101,14 @@
 				return scale;
 			},
 			_onBlur(event) {
-				let value = event.detail.value;
+				// let value = event.detail.value;
+        let value = parseInt(event.detail.value);
 				if (!value) {
-					// this.inputValue = 0;
+					this.inputValue = 1;
 					return;
 				}
 				value = +value;
-				if (value > this.max) {
+				if (value > this.max)  {
 					value = this.max;
 				} else if (value < this.min) {
 					value = this.min;

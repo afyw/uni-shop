@@ -4,7 +4,7 @@
     <!-- <my-search :bgcolor="'#ffaa00'"></my-search> -->
     <my-search @myclick="gotoSearch"></my-search>
     <view class="scroll-view-container">
-      <!-- 左侧滑动区域 -->
+      <!-- 左侧滑动区域 --> 
       <scroll-view scroll-y="true" :style="{height:wh + 'px'}" class="left-scroll-view">
         <block v-for="(item,i) in cateList" :key="i">
           <view :class="['left-scroll-view-item', i === active ? 'active':'']" @click="activeChanged(i)">
@@ -39,7 +39,9 @@
 </template>
 
 <script>
+  import badgeMix from '@/mixins/tabbar-badge.js'
   export default {
+    mixins:[badgeMix],
     data() {
       return {
         // 当前设备可用高度
